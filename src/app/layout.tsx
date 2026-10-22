@@ -22,8 +22,11 @@ export const viewport: Viewport = {
 };
 
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  // Sem banco (build sem acesso, falha momentânea), a página sai sem a data em vez de quebrar.
-  const atualizado = await ultimaAtualizacao().catch(() => null);
+  // Sem banco (build sem acesso, falha momentânea, banco lento), a página sai sem a data em vez de quebrar ou travar.
+  const atualizado = await Promise.race([
+    ultimaAtualizacao().catch(() => null),
+    new Promise<null>((r) => setTimeout(() => r(null), 5000)),
+  ]);
   return (
     <html lang="pt-BR">
       <body className="min-h-dvh antialiased">
