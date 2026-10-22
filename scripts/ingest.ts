@@ -2,7 +2,7 @@
 //   sem tarefas: roda todas; sem --desde: só o ano corrente (atualização diária).
 //   carga histórica: npm run ingest -- --desde 2023
 import "dotenv/config";
-import { sql } from "@/db/client";
+import { sql, viaPoolerTransacao } from "@/db/client";
 import { comLog } from "@/ingest/log";
 import { buscarDeputados, buscarSenadores, salvarParlamentares } from "@/ingest/parlamentares";
 import { ingerirDespesas, ingerirPresencas, ingerirProposicoes, ingerirVotacoes } from "@/ingest/camara";
@@ -18,6 +18,16 @@ import {
   ingerirReunioesCamara,
 } from "@/ingest/comissoes";
 import { lerArgumentosIngestao } from "@/ingest/util";
+
+// A ingestão grava em transações, que o pooler em modo transação (porta 6543) não permite: precisa do endereço
+// "Session pooler" (5432) ou da conexão direta. Falha logo, com a explicação, em vez de no meio da carga.
+if (viaPoolerTransacao(process.env.DATABASE_URL ?? "")) {
+  console.error(
+    "DATABASE_URL aponta para um pooler em modo transação (ex.: porta 6543). Para a ingestão use o " +
+      "Session pooler (porta 5432) ou a conexão direta. Ver DEPLOY.md, passo 2.",
+  );
+  process.exit(1);
+}
 
 const { tarefas: pedidas, anos } = lerArgumentosIngestao(process.argv.slice(2));
 

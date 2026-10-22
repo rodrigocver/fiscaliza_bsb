@@ -1,7 +1,7 @@
 import { describe, expect, it, vi } from "vitest";
 
 vi.stubEnv("DATABASE_URL", "postgres://x:y@localhost:5432/teste");
-const { enderecoParaServerless } = await import("@/db/client");
+const { enderecoParaServerless, viaPoolerTransacao } = await import("@/db/client");
 
 const sessao = "postgresql://postgres.abc:Senha123@aws-0-sa-east-1.pooler.supabase.com:5432/postgres";
 
@@ -18,5 +18,14 @@ describe("enderecoParaServerless", () => {
     expect(enderecoParaServerless("postgres://f:f@localhost:5432/fiscaliza", true)).toBe(
       "postgres://f:f@localhost:5432/fiscaliza",
     );
+  });
+});
+
+describe("viaPoolerTransacao", () => {
+  it("reconhece poolers em modo transação", () => {
+    expect(viaPoolerTransacao("postgresql://u:s@aws-0-sa-east-1.pooler.supabase.com:6543/postgres", false)).toBe(true);
+    expect(viaPoolerTransacao("postgresql://u:s@ep-x-pooler.sa-east-1.aws.neon.tech/db", false)).toBe(true);
+    expect(viaPoolerTransacao("postgres://f:f@localhost:5432/fiscaliza", false)).toBe(false);
+    expect(viaPoolerTransacao("postgres://f:f@localhost:5432/fiscaliza", true)).toBe(true);
   });
 });

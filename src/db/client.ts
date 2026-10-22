@@ -19,14 +19,28 @@ const url = enderecoParaServerless(urlConfigurada, Boolean(process.env.VERCEL));
 
 // Reaproveita a conexão entre recargas do Next.js em desenvolvimento.
 const globalForDb = globalThis as unknown as { sql?: postgres.Sql };
-// Poolers em modo transação (Supabase porta 6543, PgBouncer) não suportam prepared statements.
-const viaPooler = /:6543\b|pgbouncer=true/.test(url);
+/**
+ * Pooler em modo transação (Supabase porta 6543, Neon "-pooler", PgBouncer; ou DATABASE_POOLER=1): cada consulta pode
+ * cair numa conexão diferente do banco. Ali não valem prepared statements nem "pipelining" (o postgres.js manda até
+ * 100 consultas seguidas pela mesma conexão sem esperar as respostas): o pooler perde respostas e a consulta fica
+ * esperando para sempre (era o que travava o build na Vercel). Uma consulta por vez por conexão.
+ */
+export const viaPoolerTransacao = (endereco: string, forcar = process.env.DATABASE_POOLER === "1") =>
+  forcar || /:6543\/|-pooler\.|pgbouncer=true/.test(endereco);
+const viaPooler = viaPoolerTransacao(url);
 // Em funções serverless (Vercel), cada instância abre o próprio pool; com centenas de instâncias, poucas conexões
 // por instância e o pooler do Supabase seguram a carga (DATABASE_POOL_MAX=3; ver docs/ESCALA.md).
 const max = Number(process.env.DATABASE_POOL_MAX) || 10;
+// max_pipeline existe no postgres.js (src/index.js), mas falta nos tipos dele; por isso o objeto separado.
+const opcoes = {
+  max,
+  prepare: !viaPooler,
+  max_pipeline: viaPooler ? 0 : 100,
+  connect_timeout: 10,
+  idle_timeout: 20,
+};
 // Banco que não responde vira erro em 10 s (em vez de travar a página); conexões paradas há 20 s são devolvidas.
-export const sql =
-  globalForDb.sql ?? postgres(url, { max, prepare: !viaPooler, connect_timeout: 10, idle_timeout: 20 });
+export const sql = globalForDb.sql ?? postgres(url, opcoes);
 if (process.env.NODE_ENV !== "production") globalForDb.sql = sql;
 
 export const db = drizzle(sql, { schema });
