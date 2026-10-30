@@ -35,6 +35,12 @@ Publicadas no GitHub em 19/10/2026; a discussão e o andamento ficam lá.
 | 38 | [GitHub #7](https://github.com/rodrigocver/fiscaliza_bsb/issues/7) · [Discursos em plenário (Câmara e Senado)](issues/38-discursos.md) | v2, funcionalidade, ingestão, ajuda bem-vinda |
 | 39 | [GitHub #8](https://github.com/rodrigocver/fiscaliza_bsb/issues/8) · [Emendas parlamentares (Portal da Transparência)](issues/39-emendas-parlamentares.md) | v2, funcionalidade, ingestão, discussão |
 
+## Ainda não publicadas
+
+| # | Tarefa | Rótulos |
+|---|---|---|
+| 43 | [Ingestão: esperar mais entre tentativas nos downloads grandes](issues/43-retentativa-longa-downloads.md) | infra, ingestão, boa primeira issue |
+
 ## Para a comunidade (novas)
 
 | # | Tarefa | Rótulos |
