@@ -1,7 +1,7 @@
 import { createHash } from "node:crypto";
 import { parse } from "csv-parse";
 import { unzipSync } from "fflate";
-import { fetchComRetry } from "./http";
+import { ESPERAS_DOWNLOAD, fetchComRetry } from "./http";
 
 /** Divide em lotes para não estourar o limite de parâmetros do Postgres. */
 export function* lotes<T>(itens: T[], tamanho = 1000): Generator<T[]> {
@@ -21,11 +21,15 @@ export function anosDesde(desde: number, ate = new Date().getFullYear()): number
 
 /**
  * Baixa um arquivo grande inteiro. Transferências às vezes terminam no meio sem erro,
- * então conferimos o tamanho com o Content-Length e tentamos de novo se faltar algo.
+ * então conferimos o tamanho com o Content-Length e tentamos de novo se faltar algo. Se a fonte não responde,
+ * esperamos minutos entre as tentativas (ESPERAS_DOWNLOAD), pois as quedas costumam passar nesse prazo.
  */
-export async function baixarArquivo(url: string, tentativas = 4): Promise<Buffer> {
+export async function baixarArquivo(
+  url: string,
+  { tentativas = 4, esperasMs = ESPERAS_DOWNLOAD } = {},
+): Promise<Buffer> {
   for (let i = 1; ; i++) {
-    const res = await fetchComRetry(url, { timeoutMs: 900_000, accept: "*/*" });
+    const res = await fetchComRetry(url, { timeoutMs: 900_000, accept: "*/*", esperasMs });
     const esperado = Number(res.headers.get("content-length")) || null;
     try {
       const buf = Buffer.from(await res.arrayBuffer());

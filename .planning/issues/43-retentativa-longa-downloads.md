@@ -1,6 +1,7 @@
 ---
 titulo: "Ingestão: esperar mais entre tentativas nos downloads grandes"
 rotulos: ["infra", "ingestão", "boa primeira issue"]
+status: feito
 ---
 ## Contexto
 Quedas curtas das fontes oficiais derrubam a ingestão diária. Na execução de 29/10/2026, `camara:despesas` falhou porque
