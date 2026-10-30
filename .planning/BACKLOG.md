@@ -29,10 +29,10 @@ Publicadas no GitHub em 19/10/2026; a discussão e o andamento ficam lá.
 | 35 | [GitHub #4](https://github.com/rodrigocver/fiscaliza_bsb/issues/4) · [Página de cada partido](issues/35-pagina-partido.md) | funcionalidade, interface, métricas, ajuda bem-vinda |
 | 36 | [GitHub #5](https://github.com/rodrigocver/fiscaliza_bsb/issues/5) · [Página de cada proposição, com todas as votações nominais](issues/36-pagina-proposicao.md) | funcionalidade, interface, ajuda bem-vinda |
 | 37 | [GitHub #6](https://github.com/rodrigocver/fiscaliza_bsb/issues/6) · [Histórico de trocas de partido no perfil](issues/37-trocas-de-partido.md) | funcionalidade, ingestão, ajuda bem-vinda |
-| 40 | [GitHub #9](https://github.com/rodrigocver/fiscaliza_bsb/issues/9) · [Avisar quando a ingestão diária falhar](issues/40-alerta-falha-ingestao.md) | infra, ingestão, ajuda bem-vinda |
+| 40 | ✅ [GitHub #9](https://github.com/rodrigocver/fiscaliza_bsb/issues/9) · [Avisar quando a ingestão diária falhar](issues/40-alerta-falha-ingestao.md) | infra, ingestão, ajuda bem-vinda |
 | 41 | [GitHub #10](https://github.com/rodrigocver/fiscaliza_bsb/issues/10) · [Orçamento de desempenho no CI (Lighthouse)](issues/41-orcamento-desempenho.md) | infra, interface, ajuda bem-vinda |
 | 42 | [GitHub #11](https://github.com/rodrigocver/fiscaliza_bsb/issues/11) · [Linha do tempo do mandato no perfil](issues/42-linha-do-tempo-mandato.md) | funcionalidade, interface, ajuda bem-vinda |
-| 43 | [GitHub #12](https://github.com/rodrigocver/fiscaliza_bsb/issues/12) · [Ingestão: esperar mais entre tentativas nos downloads grandes](issues/43-retentativa-longa-downloads.md) | boa primeira issue, infra, ingestão |
+| 43 | ✅ [GitHub #12](https://github.com/rodrigocver/fiscaliza_bsb/issues/12) · [Ingestão: esperar mais entre tentativas nos downloads grandes](issues/43-retentativa-longa-downloads.md) | boa primeira issue, infra, ingestão |
 | 38 | [GitHub #7](https://github.com/rodrigocver/fiscaliza_bsb/issues/7) · [Discursos em plenário (Câmara e Senado)](issues/38-discursos.md) | v2, funcionalidade, ingestão, ajuda bem-vinda |
 | 39 | [GitHub #8](https://github.com/rodrigocver/fiscaliza_bsb/issues/8) · [Emendas parlamentares (Portal da Transparência)](issues/39-emendas-parlamentares.md) | v2, funcionalidade, ingestão, discussão |
 

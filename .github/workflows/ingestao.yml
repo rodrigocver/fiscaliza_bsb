@@ -33,9 +33,14 @@ jobs:
     if: needs.configurado.outputs.ok == '1'
     runs-on: ubuntu-latest
     timeout-minutes: 90
+    # Para abrir e fechar as issues de alerta (último passo).
+    permissions:
+      contents: read
+      issues: write
     env:
       DATABASE_URL: ${{ secrets.DATABASE_URL }}
     steps:
+      - run: echo "INICIO=$(date -u +%Y-%m-%dT%H:%M:%SZ)" >> "$GITHUB_ENV"
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
@@ -44,6 +49,7 @@ jobs:
       - run: npm ci
       - run: npm run db:migrate
       - name: Ingerir
+        id: ingerir
         run: |
           if [ -n "${{ inputs.desde }}" ]; then
             npm run ingest -- --desde "${{ inputs.desde }}"
@@ -62,3 +68,12 @@ jobs:
         run: |
           if [ -z "$APP_URL" ] || [ -z "$REVALIDAR_SEGREDO" ]; then echo "APP_URL ou REVALIDAR_SEGREDO não configurados; pulando."; exit 0; fi
           curl -fsS -X POST -H "Authorization: Bearer $REVALIDAR_SEGREDO" "$APP_URL/api/revalidar"
+      # Uma issue "Ingestão falhou: <tarefa>" por tarefa com erro; comenta se já existe e fecha quando volta a passar.
+      # Não roda quando a execução é cancelada à mão.
+      - name: Avisar falhas
+        if: ${{ !cancelled() }}
+        env:
+          RESULTADO_INGERIR: ${{ steps.ingerir.outcome }}
+          GITHUB_TOKEN: ${{ github.token }}
+          EXECUCAO_URL: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}
+        run: npx tsx scripts/alertar-ingestao.ts

@@ -1,6 +1,7 @@
 ---
 titulo: "Avisar quando a ingestão diária falhar"
 rotulos: ["infra", "ingestão", "ajuda bem-vinda"]
+status: feito
 ---
 ## Contexto
 Se uma fonte oficial muda de formato, a ingestão falha e o site segue com dados velhos. Hoje isso só aparece na

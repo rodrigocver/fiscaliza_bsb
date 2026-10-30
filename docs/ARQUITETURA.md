@@ -66,3 +66,5 @@
 | `estatisticas` | Recalcula a visão `janela_exercicio` e a tabela `estatistica` (sempre por último) |
 
 Cada execução é registrada em `ingestao_log`; o rodapé do site mostra a última atualização bem-sucedida.
+No GitHub Actions, o último passo do workflow (`scripts/alertar-ingestao.ts`) abre uma issue "Ingestão falhou: <tarefa>"
+para cada tarefa com erro, comenta nela se a falha se repete e a fecha quando a tarefa volta a passar.

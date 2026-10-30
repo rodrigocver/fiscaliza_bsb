@@ -47,6 +47,7 @@ Verificado em 19/10/2026. Se algo mudou na fonte, atualize este arquivo no mesmo
 | Problema | Como o código lida |
 |---|---|
 | Downloads grandes chegam cortados sem erro | `baixarArquivo` confere o `Content-Length` e tenta de novo |
+| Servidores ficam minutos sem responder (`www.camara.leg.br` sem aceitar conexão em 29/10/2026; HTTP 503 do Senado em 27/10/2026) | `baixarArquivo` espera 30 s, 2 min e 5 min entre tentativas (`ESPERAS_DOWNLOAD`); chamadas de API, que são muitas, seguem com 2, 4 e 8 s. Cada nova tentativa sai no log com o motivo |
 | A Câmara regenera os arquivos de madrugada (~01h–02h de Brasília); quem baixa nesse horário recebe JSON truncado | `baixarJson` espera e tenta de novo; o agendamento roda às 06h17 |
 | CSV de proposições da Câmara tem aspas malformadas | Usamos a versão JSON do mesmo arquivo |
 | `votacoesObjetos` (Câmara) lista pareceres e emendas, não a matéria principal | Usamos `votacoesProposicoes` e o prefixo do id da votação |
