@@ -1,6 +1,7 @@
 ---
 titulo: "Atualizações automáticas de dependências (Dependabot)"
 rotulos: ["boa primeira issue", "infra"]
+status: feito
 ---
 ## Contexto
 Não há `.github/dependabot.yml`. Next.js, Auth.js e as Actions recebem correções de segurança com frequência e

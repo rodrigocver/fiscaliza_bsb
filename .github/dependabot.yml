@@ -1,0 +1,52 @@
+# Atualizações automáticas de dependências. Toda semana, um PR por ecossistema com as versões menores e correções
+# agrupadas; o CI roda nele os mesmos testes de um PR comum, inclusive os de ponta a ponta. Alertas de segurança
+# continuam chegando em PRs próprios, fora do agrupamento. Como revisar: CONTRIBUTING.md, "Fluxo de trabalho".
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "08:00"
+      timezone: America/Sao_Paulo
+    open-pull-requests-limit: 5
+    labels: ["infra"]
+    commit-message:
+      prefix: "Dependências"
+    groups:
+      menores:
+        update-types: [minor, patch]
+    ignore:
+      # Versão maior de Next.js e React muda cache, renderização estática e APIs de rota (docs/ESCALA.md): migração
+      # feita à mão, lendo o guia de atualização. eslint-config-next e os tipos do React andam junto.
+      - dependency-name: next
+        update-types: [version-update:semver-major]
+      - dependency-name: eslint-config-next
+        update-types: [version-update:semver-major]
+      - dependency-name: react
+        update-types: [version-update:semver-major]
+      - dependency-name: react-dom
+        update-types: [version-update:semver-major]
+      - dependency-name: "@types/react*"
+        update-types: [version-update:semver-major]
+      # Drizzle ainda está em 0.x: cada versão "menor" (0.45 → 0.46) pode quebrar consultas e migrações, e
+      # drizzle-orm e drizzle-kit precisam andar juntos. Atualização à mão, conferindo `npm run db:generate`.
+      - dependency-name: drizzle-orm
+        update-types: [version-update:semver-major, version-update:semver-minor]
+      - dependency-name: drizzle-kit
+        update-types: [version-update:semver-major, version-update:semver-minor]
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "08:00"
+      timezone: America/Sao_Paulo
+    labels: ["infra"]
+    commit-message:
+      prefix: "Actions"
+    groups:
+      actions:
+        patterns: ["*"]

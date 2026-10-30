@@ -25,7 +25,7 @@ Publicadas no GitHub em 19/10/2026; a discussão e o andamento ficam lá.
 |---|---|---|
 | 32 | [GitHub #1](https://github.com/rodrigocver/fiscaliza_bsb/issues/1) · [Botão para alternar entre tema claro e escuro](issues/32-tema-claro-escuro.md) | boa primeira issue, interface |
 | 33 | [GitHub #2](https://github.com/rodrigocver/fiscaliza_bsb/issues/2) · [Feed RSS de cada parlamentar](issues/33-feed-rss.md) | boa primeira issue, funcionalidade |
-| 34 | [GitHub #3](https://github.com/rodrigocver/fiscaliza_bsb/issues/3) · [Atualizações automáticas de dependências (Dependabot)](issues/34-dependabot.md) | boa primeira issue, infra |
+| 34 | ✅ [GitHub #3](https://github.com/rodrigocver/fiscaliza_bsb/issues/3) · [Atualizações automáticas de dependências (Dependabot)](issues/34-dependabot.md) | boa primeira issue, infra |
 | 35 | [GitHub #4](https://github.com/rodrigocver/fiscaliza_bsb/issues/4) · [Página de cada partido](issues/35-pagina-partido.md) | funcionalidade, interface, métricas, ajuda bem-vinda |
 | 36 | [GitHub #5](https://github.com/rodrigocver/fiscaliza_bsb/issues/5) · [Página de cada proposição, com todas as votações nominais](issues/36-pagina-proposicao.md) | funcionalidade, interface, ajuda bem-vinda |
 | 37 | [GitHub #6](https://github.com/rodrigocver/fiscaliza_bsb/issues/6) · [Histórico de trocas de partido no perfil](issues/37-trocas-de-partido.md) | funcionalidade, ingestão, ajuda bem-vinda |
