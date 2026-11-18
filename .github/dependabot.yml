@@ -36,6 +36,16 @@ updates:
         update-types: [version-update:semver-major, version-update:semver-minor]
       - dependency-name: drizzle-kit
         update-types: [version-update:semver-major, version-update:semver-minor]
+      # ESLint e TypeScript dependem do lint do Next (eslint-config-next, que traz o typescript-eslint). ESLint 10 só
+      # é aceito a partir do eslint-config-next 16, que anda com o Next 16; TypeScript 7 ainda não é aceito pelo
+      # typescript-eslint (até 6.0 em nov/2026). Sobem à mão, junto com a migração do Next.
+      - dependency-name: eslint
+        update-types: [version-update:semver-major]
+      - dependency-name: typescript
+        update-types: [version-update:semver-major]
+      # Os tipos do Node seguem a versão usada no CI e nos workflows (22); sobem quando ela subir.
+      - dependency-name: "@types/node"
+        update-types: [version-update:semver-major]
 
   - package-ecosystem: github-actions
     directory: /

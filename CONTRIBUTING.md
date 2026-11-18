@@ -71,8 +71,9 @@ npm run dev                     # http://localhost:3000
 5. Um mantenedor revisa. Pedidos de ajuste são normais; responda nos comentários.
 
 **PRs do Dependabot** (`.github/dependabot.yml`, toda segunda): se o CI passou, inclusive os testes de ponta a ponta,
-leia as notas de versão dos pacotes com mudança de comportamento e faça o merge. Versões maiores de Next.js, React
-e Drizzle ficam de fora e são atualizadas à mão.
+leia as notas de versão dos pacotes com mudança de comportamento e faça o merge. Versões maiores de Next.js, React,
+Drizzle, ESLint, TypeScript e dos tipos do Node ficam de fora e são atualizadas à mão (o motivo de cada uma está
+comentado no `dependabot.yml`).
 
 ### Mensagens de commit
 
