@@ -27,7 +27,7 @@
     "csv-parse": "^7.0.3",
     "drizzle-orm": "^0.45.4",
     "fflate": "^0.8.3",
-    "marked": "^18.2.0",
+    "marked": "^18.2.1",
     "next": "15.5.29",
     "next-auth": "^5.0.0-beta.32",
     "postgres": "^3.4.9",
@@ -38,7 +38,7 @@
   "devDependencies": {
     "@axe-core/playwright": "4.14.0",
     "@eslint/eslintrc": "^3",
-    "@playwright/test": "1.65.0",
+    "@playwright/test": "1.65.1",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^22.20.5",
     "@types/react": "^19",
@@ -47,12 +47,12 @@
     "drizzle-kit": "^0.31.11",
     "eslint": "^9",
     "eslint-config-next": "15.5.29",
-    "playwright-core": "1.65.0",
+    "playwright-core": "1.65.1",
     "prettier": "^3.10.1",
     "tailwindcss": "^4",
     "tsx": "^4.23.15",
     "typescript": "^5",
-    "vitest": "^5.1.0"
+    "vitest": "^5.1.1"
   },
   "license": "MIT",
   "description": "Acompanhe presença, votações, projetos e gastos de deputados federais e senadores com dados públicos oficiais."
